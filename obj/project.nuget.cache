@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "KV8uzG2ib0w68+/Vcze5O/vzL5HhWnmvac6ioD6EFoJ09rWKN9Vgeit5YvKtgJ8NK2HykudJ7r1FSv7ssbr+fA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Owner\\MathGame.CSA\\MathGame.CSA.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Owner\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512"
+  ],
+  "logs": []
+}
