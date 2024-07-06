@@ -6,6 +6,7 @@ namespace MathGame.CSA;
 public class Printer
 {
   //will print all console statements
+  //need to make enums lists into lists of their values before writing then link after choice is made
   public static void PrintHeader()
   {
     Console.WriteLine();
@@ -18,7 +19,21 @@ public class Printer
       .AddChoices("Yes", "No")
     );
     return isRandom == "Yes";
-
+  }
+  public static void PrintNumberOfQuestionsPrompt()
+  {
+    Console.WriteLine("How many questions do you want the game to be?");
+    //read and validate where called
+  }
+  public static void PrintProgressBar(int numQuestions, int currentScore)
+  {
+    var chart = new BarChart()
+    .Width(60)
+    .Label("[green]Math Game[/]")
+    .CenterLabel()
+    .WithMaxValue(numQuestions)
+    .AddItem("Level", currentScore, Color.Green);
+    AnsiConsole.Write(chart);
   }
   public static Operation PrintOperationPrompt()
   {
@@ -47,9 +62,17 @@ public class Printer
   {
     Console.WriteLine();
   }
-  public static string PrintInitialsPrompt()
+  public string PrintInitialsPrompt()
   {
-    Console.WriteLine("Enter your initials: ");
-    return Console.ReadLine(); //validate where this gets called
+    string response = AnsiConsole.Prompt(
+      new TextPrompt<string>("[green]Enter your initials[/]")
+    .Validate(initials =>
+    {
+      return initials.Length != 3
+      ? ValidationResult.Error("[red]Initials must be 3 letters.")
+      : ValidationResult.Success();
+    }
+    ));
+    return response;
   }
 }
