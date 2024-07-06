@@ -7,8 +7,8 @@ namespace MathGame.CSA;
 public class GameLoop
 {
   private static GameSettings? settings;
-  private static Question newQuestion;
-  private static Stopwatch timer = new Stopwatch();
+  private static Question? newQuestion;
+  private static readonly Stopwatch timer = new();
   //StartGame 
   public static void DisplayMainMenu()
   {
@@ -31,7 +31,7 @@ public class GameLoop
     while (settings.QuestionsAnswered < settings.NumberOfQuestions)
     {
       int userAttempt = DisplayNextQuetsion();
-      if (!CheckAnswer(userAttempt, newQuestion.Answer))
+      if (!CheckAnswer(userAttempt, newQuestion!.Answer))
       {
         GameOver();
         return;
@@ -43,16 +43,16 @@ public class GameLoop
   private static int DisplayNextQuetsion()
   {
     Console.Clear();
-    Printer.PrintProgressBar(settings.NumberOfQuestions, settings.QuestionsAnswered);
+    Printer.PrintProgressBar(settings!.NumberOfQuestions, settings.QuestionsAnswered);
     GenerateQuestion();
-    return Printer.PrintQuestion(newQuestion.QuestionText);
+    return Printer.PrintQuestion(newQuestion?.QuestionText!);
   }
 
   private static bool CheckAnswer(int attempt, int answer)
   {
     if (attempt == answer)
     {
-      settings.Increment();
+      settings!.Increment();
       return true;
     }
     return false;
@@ -63,10 +63,10 @@ public class GameLoop
     timer.Stop();
     TimeSpan time = timer.Elapsed;
     Console.Clear();
-    bool completed = settings.QuestionsAnswered == settings.NumberOfQuestions ? true : false;
+    bool completed = settings!.QuestionsAnswered == settings.NumberOfQuestions;
     Printer.PrintGameOver(settings.QuestionsAnswered);
     string initials = Printer.PrintInitialsPrompt();
-    LeaderboardEntry newEntry = new LeaderboardEntry(settings.QuestionsAnswered, initials, settings.DifficultySetting.ToString(), time, completed);
+    LeaderboardEntry newEntry = new(settings.QuestionsAnswered, initials, settings.DifficultySetting.ToString(), time, completed);
     Leaderboard.AddEntry(newEntry);
     Thread.Sleep(1000);
     Console.Clear();
@@ -75,7 +75,7 @@ public class GameLoop
 
   private static Question GenerateQuestion()
   {
-    if (!settings.IsRandom)
+    if (!settings!.IsRandom)
     {
       newQuestion = new Question(settings.InitialOperation, settings.DifficultySetting);
     }

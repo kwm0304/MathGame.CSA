@@ -17,10 +17,6 @@ public class Leaderboard
   {
     return Entries.OrderByDescending(e => e.EntryScore).ToList();
   }
-  public static List<LeaderboardEntry> GetByMostRecent()
-  {
-    return Entries.OrderByDescending(e => e.EntryDate).ThenByDescending(e => e.EntryScore).ToList();
-  }
   public static void SaveEntry()
   {
     JsonSerializerOptions options = new()

@@ -4,10 +4,6 @@ C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\MathGame.CSA.runtimeconfig.json
 C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\MathGame.CSA.dll
 C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\MathGame.CSA.pdb
 C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\Spectre.Console.dll
-C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\Spectre.Console.Cli.dll
-C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\de\Spectre.Console.Cli.resources.dll
-C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\fr\Spectre.Console.Cli.resources.dll
-C:\Users\Owner\MathGame.CSA\bin\Debug\net8.0\sv\Spectre.Console.Cli.resources.dll
 C:\Users\Owner\MathGame.CSA\obj\Debug\net8.0\MathGame.CSA.csproj.AssemblyReference.cache
 C:\Users\Owner\MathGame.CSA\obj\Debug\net8.0\MathGame.CSA.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Owner\MathGame.CSA\obj\Debug\net8.0\MathGame.CSA.AssemblyInfoInputs.cache

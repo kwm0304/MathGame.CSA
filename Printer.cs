@@ -7,7 +7,6 @@ namespace MathGame.CSA;
 public class Printer
 {
   //will print all console statements, if using ansi will return value
-  //need to make enums lists into lists of their values before writing then link after choice is made
   public static void PrintHeader()
   {
     AnsiConsole.WriteLine(@"
@@ -41,7 +40,6 @@ public class Printer
       })
     );
     return numberOfQuestions;
-    //read and validate where called
   }
   public static void PrintProgressBar(int numQuestions, int currentScore)
   {
@@ -105,7 +103,7 @@ public class Printer
  \______| /__/     \__\ |__|  |__| |_______|    \______/      \__/     |_______|| _| `._____|
                                                                                              
 ");
-    AnsiConsole.WriteLine($"[blue]Score: {score}[/]");
+    AnsiConsole.MarkupLine($"[blue]Score: {score}[/]");
   }
   public static string PrintInitialsPrompt()
   {
@@ -139,7 +137,7 @@ public class Printer
 ").Centered().Expand();
       table.Border(TableBorder.Rounded);
       table.Centered();
-      table.AddColumns("Score", "Player", "Date","Difficulty", "Time", "Completed").Centered();
+      table.AddColumns("Score", "Player", "Date", "Difficulty", "Time", "Completed").Centered();
       foreach (LeaderboardEntry entry in leaderboard)
       {
         table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString(), entry.EntryDifficulty, entry.TimeTaken.TotalSeconds.ToString(), entry.Completed.ToString());
