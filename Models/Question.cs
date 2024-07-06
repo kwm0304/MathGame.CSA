@@ -24,13 +24,14 @@ public class Question
     if (QuestionOperation == Operation.Division)
     {
       SecondNumber = GlobalConfig.random.Next(1, 11);
-      FirstNumber = GlobalConfig.random.Next(1, difficultyVar) / SecondNumber * SecondNumber; 
+      int tempFirst = GlobalConfig.random.Next(1, difficultyVar);
+      FirstNumber = tempFirst * SecondNumber; 
       Answer = FirstNumber / SecondNumber;
       QuestionText = $"What is {FirstNumber} / {SecondNumber}";
     }
     else if (QuestionOperation == Operation.Subtraction)
     {
-      FirstNumber = GlobalConfig.random.Next(1, difficultyVar);
+      FirstNumber = GlobalConfig.random.Next(2, difficultyVar);
       SecondNumber = GlobalConfig.random.Next(1, FirstNumber);
       Answer = FirstNumber - SecondNumber;
       QuestionText = $"What is {FirstNumber} - {SecondNumber}?";

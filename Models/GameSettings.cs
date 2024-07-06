@@ -5,10 +5,10 @@ namespace MathGame.CSA.Models;
 public class GameSettings
 {
   //initialized after collecting user choices
-  private Operation InitialOperation { get; set; }
-  private Difficulty DifficultySetting { get; set; }
-  private bool IsRandom { get; set; }
-  private int NumberOfQuestions { get; set; }
+  public Operation InitialOperation { get; set; }
+  public Difficulty DifficultySetting { get; set; }
+  public bool IsRandom { get; set; }
+  public int NumberOfQuestions { get; set; }
   public int QuestionsAnswered { get; private set; } = 0;
   public GameSettings(
     Operation initialOperation, Difficulty difficultySetting,
@@ -21,16 +21,10 @@ public class GameSettings
   }
   public GameSettings(Difficulty difficultySetting, bool isRandom, int numberOfQuetsions)
   {
-    InitialOperation = ChooseRandomOperation();
+    InitialOperation = GlobalConfig.RandomOperation();
     DifficultySetting = difficultySetting;
     IsRandom = isRandom;
     NumberOfQuestions = numberOfQuetsions;
-  }
-
-  private Operation ChooseRandomOperation()
-  {
-    int operationIndex = GlobalConfig.random.Next(GlobalConfig.OperationsList.Count);
-    return GlobalConfig.OperationsList[operationIndex];
   }
   public void Increment()
   {

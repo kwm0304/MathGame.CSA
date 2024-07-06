@@ -5,7 +5,6 @@ CHALLENGES
 - User option to pick number of questions
 - Randomize option
 */
-using MathGame.CSA;
 
 namespace MathGame.CSA;
 class Program

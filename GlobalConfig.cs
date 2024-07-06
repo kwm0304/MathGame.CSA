@@ -18,4 +18,9 @@ public static class GlobalConfig
       Difficulty.Medium,
       Difficulty.Hard
     };
+    public static Operation RandomOperation()
+    {
+      int index = random.Next(OperationsList.Count);
+      return OperationsList[index];
+    }
 }

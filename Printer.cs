@@ -81,11 +81,20 @@ public class Printer
     return difficulty;
   }
 
-  public static void PrintQuestion(string questionText)
+  public static int PrintQuestion(string questionText)
   {
-    Console.WriteLine(questionText);
+    int userAttempt = AnsiConsole.Prompt(
+      new TextPrompt<int>($"[green]{questionText}[/]")
+      .Validate(input =>
+      {
+        return input > 0
+        ? ValidationResult.Success()
+        : ValidationResult.Error("[red]Input must be a number[/]");
+      })
+    );
+    return userAttempt;
   }
-  public static void PrintGameOver()
+  public static void PrintGameOver(int score)
   {
     AnsiConsole.WriteLine(@"
   _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      
@@ -96,8 +105,9 @@ public class Printer
  \______| /__/     \__\ |__|  |__| |_______|    \______/      \__/     |_______|| _| `._____|
                                                                                              
 ");
+    AnsiConsole.WriteLine($"[blue]Score: {score}[/]");
   }
-  public string PrintInitialsPrompt()
+  public static string PrintInitialsPrompt()
   {
     string response = AnsiConsole.Prompt(
       new TextPrompt<string>("[green]Enter your initials[/]")
@@ -113,19 +123,26 @@ public class Printer
 
   public static void PrintLeaderboard()
   {
-    AnsiConsole.WriteLine("**Press any key to return home**");
     List<LeaderboardEntry> leaderboard = Leaderboard.GetByHighScore();
     if (leaderboard != null && leaderboard.Count != 0)
     {
       var table = new Table();
-      table.Title("Leaderboard").Centered();
+      table.Title(@"
+ __       _______     ___       _______   _______ .______      .______     ______        ___      .______       _______  
+|  |     |   ____|   /   \     |       \ |   ____||   _  \     |   _  \   /  __  \      /   \     |   _  \     |       \ 
+|  |     |  |__     /  ^  \    |  .--.  ||  |__   |  |_)  |    |  |_)  | |  |  |  |    /  ^  \    |  |_)  |    |  .--.  |
+|  |     |   __|   /  /_\  \   |  |  |  ||   __|  |      /     |   _  <  |  |  |  |   /  /_\  \   |      /     |  |  |  |
+|  `----.|  |____ /  _____  \  |  '--'  ||  |____ |  |\  \----.|  |_)  | |  `--'  |  /  _____  \  |  |\  \----.|  '--'  |
+|_______||_______/__/     \__\ |_______/ |_______|| _| `._____||______/   \______/  /__/     \__\ | _| `._____||_______/ 
+                                                                                                                         
+").Centered();
       table.Border(TableBorder.Rounded);
       table.Expand();
       table.Centered();
-      table.AddColumns("Score", "Player", "Date").Centered();
+      table.AddColumns("Score", "Player", "Date", "Time", "Completed").Centered();
       foreach (LeaderboardEntry entry in leaderboard)
       {
-        table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString());
+        table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString(), entry.TimeTaken.TotalSeconds.ToString(), entry.Completed.ToString());
       }
       AnsiConsole.Write(table);
     }
@@ -133,7 +150,8 @@ public class Printer
     {
       AnsiConsole.WriteLine("No entries to display");
     }
-    Thread.Sleep(1000);
+    AnsiConsole.WriteLine("**Press any key to return home**");
+    Console.ReadKey(true);
     Console.Clear();
   }
 }
