@@ -1,0 +1,34 @@
+[
+  {
+    "EntryScore": 5,
+    "Initials": "kwm",
+    "EntryDate": "2024-07-06T00:00:00-04:00",
+    "EntryDifficulty": "Easy",
+    "TimeTaken": "00:00:13.0216227",
+    "Completed": true
+  },
+  {
+    "EntryScore": 5,
+    "Initials": "kwm",
+    "EntryDate": "2024-07-06T00:00:00-04:00",
+    "EntryDifficulty": "Hard",
+    "TimeTaken": "00:00:26.4861325",
+    "Completed": true
+  },
+  {
+    "EntryScore": 3,
+    "Initials": "kwm",
+    "EntryDate": "2024-07-06T00:00:00-04:00",
+    "EntryDifficulty": "Easy",
+    "TimeTaken": "00:00:04.3100560",
+    "Completed": true
+  },
+  {
+    "EntryScore": 1,
+    "Initials": "kwm",
+    "EntryDate": "2024-07-06T00:00:00-04:00",
+    "EntryDifficulty": "Easy",
+    "TimeTaken": "00:00:03.4221302",
+    "Completed": false
+  }
+]

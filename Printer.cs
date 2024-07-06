@@ -123,6 +123,7 @@ public class Printer
 
   public static void PrintLeaderboard()
   {
+    Console.Clear();
     List<LeaderboardEntry> leaderboard = Leaderboard.GetByHighScore();
     if (leaderboard != null && leaderboard.Count != 0)
     {
@@ -135,14 +136,13 @@ public class Printer
 |  `----.|  |____ /  _____  \  |  '--'  ||  |____ |  |\  \----.|  |_)  | |  `--'  |  /  _____  \  |  |\  \----.|  '--'  |
 |_______||_______/__/     \__\ |_______/ |_______|| _| `._____||______/   \______/  /__/     \__\ | _| `._____||_______/ 
                                                                                                                          
-").Centered();
+").Centered().Expand();
       table.Border(TableBorder.Rounded);
-      table.Expand();
       table.Centered();
-      table.AddColumns("Score", "Player", "Date", "Time", "Completed").Centered();
+      table.AddColumns("Score", "Player", "Date","Difficulty", "Time", "Completed").Centered();
       foreach (LeaderboardEntry entry in leaderboard)
       {
-        table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString(), entry.TimeTaken.TotalSeconds.ToString(), entry.Completed.ToString());
+        table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString(), entry.EntryDifficulty, entry.TimeTaken.TotalSeconds.ToString(), entry.Completed.ToString());
       }
       AnsiConsole.Write(table);
     }

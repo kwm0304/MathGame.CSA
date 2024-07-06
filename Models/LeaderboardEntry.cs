@@ -8,6 +8,7 @@ public class LeaderboardEntry
   public string EntryDifficulty { get; set; }
   public TimeSpan TimeTaken { get; set; }
   public bool Completed { get; set; }
+
   public LeaderboardEntry(int entryScore, string initials, string entryDifficulty, TimeSpan timeTaken, bool completed)
   {
     EntryScore = entryScore;

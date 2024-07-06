@@ -38,7 +38,6 @@ public class GameLoop
       }
     }
     GameOver();
-
   }
 
   private static int DisplayNextQuetsion()
@@ -74,7 +73,6 @@ public class GameLoop
     Printer.PrintLeaderboard();
   }
 
-
   private static Question GenerateQuestion()
   {
     if (!settings.IsRandom)
@@ -106,5 +104,4 @@ public class GameLoop
     }
     return settings;
   }
-  //  StartTimer
 }
