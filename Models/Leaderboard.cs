@@ -2,11 +2,8 @@ namespace MathGame.CSA.Models;
 
 public class Leaderboard
 {
-  public static List<LeaderboardEntry> Entries { get; private set; }
-  public Leaderboard()
-  {
-    Entries = new List<LeaderboardEntry>();
-  }
+  public static List<LeaderboardEntry> Entries { get; private set; } = new List<LeaderboardEntry>();
+  public Leaderboard(){}
   public void AddEntry(LeaderboardEntry entry)
   {
     Entries.Add(entry);

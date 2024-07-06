@@ -9,11 +9,19 @@ public class GameSettings
   private Difficulty DifficultySetting { get; set; }
   private bool IsRandom { get; set; }
   private int NumberOfQuestions { get; set; }
+  public int QuestionsAnswered { get; private set; } = 0;
   public GameSettings(
     Operation initialOperation, Difficulty difficultySetting,
     bool isRandom, int numberOfQuetsions)
   {
-    InitialOperation = !isRandom ? initialOperation : ChooseRandomOperation();
+    InitialOperation = initialOperation;
+    DifficultySetting = difficultySetting;
+    IsRandom = isRandom;
+    NumberOfQuestions = numberOfQuetsions;
+  }
+  public GameSettings(Difficulty difficultySetting, bool isRandom, int numberOfQuetsions)
+  {
+    InitialOperation = ChooseRandomOperation();
     DifficultySetting = difficultySetting;
     IsRandom = isRandom;
     NumberOfQuestions = numberOfQuetsions;
@@ -21,7 +29,12 @@ public class GameSettings
 
   private Operation ChooseRandomOperation()
   {
-    throw new NotImplementedException();
+    int operationIndex = GlobalConfig.random.Next(GlobalConfig.OperationsList.Count);
+    return GlobalConfig.OperationsList[operationIndex];
+  }
+  public void Increment()
+  {
+    QuestionsAnswered++;
   }
 
 }

@@ -6,11 +6,19 @@ namespace MathGame.CSA;
 
 public class Printer
 {
-  //will print all console statements
+  //will print all console statements, if using ansi will return value
   //need to make enums lists into lists of their values before writing then link after choice is made
   public static void PrintHeader()
   {
-    Console.WriteLine();
+    AnsiConsole.WriteLine(@"
+.___  ___.      ___   .___________. __    __       _______      ___      .___  ___.  _______ 
+|   \/   |     /   \  |           ||  |  |  |     /  _____|    /   \     |   \/   | |   ____|
+|  \  /  |    /  ^  \ `---|  |----`|  |__|  |    |  |  __     /  ^  \    |  \  /  | |  |__   
+|  |\/|  |   /  /_\  \    |  |     |   __   |    |  | |_ |   /  /_\  \   |  |\/|  | |   __|  
+|  |  |  |  /  _____  \   |  |     |  |  |  |    |  |__| |  /  _____  \  |  |  |  | |  |____ 
+|__|  |__| /__/     \__\  |__|     |__|  |__|     \______| /__/     \__\ |__|  |__| |_______|
+                                                                                             
+");
   }
   public static bool PrintRandomPrompt()
   {
@@ -21,9 +29,18 @@ public class Printer
     );
     return isRandom == "Yes";
   }
-  public static void PrintNumberOfQuestionsPrompt()
+  public static int PrintNumberOfQuestionsPrompt()
   {
-    Console.WriteLine("How many questions do you want the game to be?");
+    int numberOfQuestions = AnsiConsole.Prompt(
+      new TextPrompt<int>("[green]How many questions do you want the game to be?[/]")
+      .Validate(input =>
+      {
+        return input > 0
+        ? ValidationResult.Success()
+        : ValidationResult.Error("[red]Input must be a number[/]");
+      })
+    );
+    return numberOfQuestions;
     //read and validate where called
   }
   public static void PrintProgressBar(int numQuestions, int currentScore)
@@ -41,7 +58,7 @@ public class Printer
   {
     string option = AnsiConsole.Prompt(
       new SelectionPrompt<string>()
-      .AddChoices(["[blue]Play", "Leaderboard[/]"])
+      .AddChoices("Play", "Leaderboard")
     );
     return option;
   }
@@ -70,7 +87,15 @@ public class Printer
   }
   public static void PrintGameOver()
   {
-    Console.WriteLine();
+    AnsiConsole.WriteLine(@"
+  _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______      
+ /  _____|    /   \     |   \/   | |   ____|    /  __  \  \   \  /   / |   ____||   _  \     
+|  |  __     /  ^  \    |  \  /  | |  |__      |  |  |  |  \   \/   /  |  |__   |  |_)  |    
+|  | |_ |   /  /_\  \   |  |\/|  | |   __|     |  |  |  |   \      /   |   __|  |      /     
+|  |__| |  /  _____  \  |  |  |  | |  |____    |  `--'  |    \    /    |  |____ |  |\  \----.
+ \______| /__/     \__\ |__|  |__| |_______|    \______/      \__/     |_______|| _| `._____|
+                                                                                             
+");
   }
   public string PrintInitialsPrompt()
   {
@@ -85,21 +110,30 @@ public class Printer
     ));
     return response;
   }
-  
+
   public static void PrintLeaderboard()
   {
     AnsiConsole.WriteLine("**Press any key to return home**");
     List<LeaderboardEntry> leaderboard = Leaderboard.GetByHighScore();
-    var table = new Table();
-    table.Title("Leaderboard").Centered();
-    table.Border(TableBorder.Rounded);
-    table.Expand();
-    table.Centered();
-    table.AddColumns("Score","Player", "Date").Centered();
-    foreach (LeaderboardEntry entry in leaderboard)
+    if (leaderboard != null && leaderboard.Count != 0)
     {
-      table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString());
+      var table = new Table();
+      table.Title("Leaderboard").Centered();
+      table.Border(TableBorder.Rounded);
+      table.Expand();
+      table.Centered();
+      table.AddColumns("Score", "Player", "Date").Centered();
+      foreach (LeaderboardEntry entry in leaderboard)
+      {
+        table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString());
+      }
+      AnsiConsole.Write(table);
     }
-    AnsiConsole.Write(table);
+    else
+    {
+      AnsiConsole.WriteLine("No entries to display");
+    }
+    Thread.Sleep(1000);
+    Console.Clear();
   }
 }
