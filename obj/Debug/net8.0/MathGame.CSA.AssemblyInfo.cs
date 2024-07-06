@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MathGame.CSA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ccded7e6aa48a6d4e1e125738a047e66e2646df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+017831f49a07b96e4c701a3a8afae79e19384e8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MathGame.CSA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MathGame.CSA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
