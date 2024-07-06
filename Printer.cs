@@ -1,4 +1,5 @@
 using MathGame.CSA.Enums;
+using MathGame.CSA.Models;
 using Spectre.Console;
 
 namespace MathGame.CSA;
@@ -83,5 +84,22 @@ public class Printer
     }
     ));
     return response;
+  }
+  
+  public static void PrintLeaderboard()
+  {
+    AnsiConsole.WriteLine("**Press any key to return home**");
+    List<LeaderboardEntry> leaderboard = Leaderboard.GetByHighScore();
+    var table = new Table();
+    table.Title("Leaderboard").Centered();
+    table.Border(TableBorder.Rounded);
+    table.Expand();
+    table.Centered();
+    table.AddColumns("Score","Player", "Date").Centered();
+    foreach (LeaderboardEntry entry in leaderboard)
+    {
+      table.AddRow(entry.EntryScore.ToString(), entry.Initials, entry.EntryDate.ToString());
+    }
+    AnsiConsole.Write(table);
   }
 }
