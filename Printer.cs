@@ -35,6 +35,15 @@ public class Printer
     .AddItem("Level", currentScore, Color.Green);
     AnsiConsole.Write(chart);
   }
+
+  public static string PrintMainMenuOptions()
+  {
+    string option = AnsiConsole.Prompt(
+      new SelectionPrompt<string>()
+      .AddChoices(["[blue]Play", "Leaderboard[/]"])
+    );
+    return option;
+  }
   public static Operation PrintOperationPrompt()
   {
     Operation operation = AnsiConsole.Prompt(
